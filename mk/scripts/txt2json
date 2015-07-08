@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+
+'use strict';
+
+let path = require('path')
+let fs = require('fs')
+let util = require('util')
+
+let usage = function() {
+    console.error(`Usage: ${path.basename(process.argv[1])} file1.txt [file2.txt ...]`)
+    process.exit(1)
+}
+
+let parse_tags = function(line) {
+    return line.split(',').map(function(val) { return val.trim() })
+}
+
+let tags_union = function(a, b) {
+    return a.concat(b.filter(function (item) {
+	return a.indexOf(item) < 0
+    }))
+}
+
+let data_index_of = function(data, id) {
+    for (let idx in data) {
+	if (data[idx].id === id) return idx
+    }
+    return -1
+}
+
+let parse = function(file) {
+    let data = []
+    let text = fs.readFileSync(file).toString().split("\n")
+
+    let tags = []
+    let cache = {}
+    let index = 0
+    for (let line of text) {
+	if (line.match(/^(\s*$|#.*)$/)) continue // comments & empty lines
+
+	if (!line.match(/[.?!]/)) {
+	    tags = parse_tags(line)
+	    continue
+	}
+
+	// 'line' contains a proverb
+	let parts = line.trim().match(/^(.+)\s+\((.+?)\)$/)
+	let proverb = parts[1]
+	let ctags = tags_union(tags, parse_tags(parts[2]))
+	if (proverb in cache) {
+	    // append new tags to an existing entry
+	    let idx = data_index_of(data, cache[proverb])
+	    data[idx].t = tags_union(data[idx].t, ctags)
+	} else {
+	    data.push({
+		id: index,
+		p: proverb,
+		t: ctags
+	    })
+
+	    cache[proverb] = index++
+	}
+    }
+
+    return data
+}
+
+if (process.argv.length < 3) usage()
+
+let arr = process.argv.slice(2).map(parse)
+console.log(util.inspect(arr[0], { depth: null }))
