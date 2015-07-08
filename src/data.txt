@@ -9262,7 +9262,7 @@ He who hesitates despairs. (Mexican)
 He who hesitates is lost. (English)
 He who hesitates regrets. (Albanian)
 
-Hid, Hidden, Hide
+Hide, Hidden
 Do not hide like a fly under the tail of a horse. (Albanian)
 Do not hide like the mouse behind the pot. (Albanian)
 He that hides can find. (French)
@@ -19690,7 +19690,7 @@ Every uphill has its downhill. (Yiddish)
 Upright
 If you are standing upright, don't worry if your shadow is crooked. (Chinese)
 
-Use, Used, Useful
+Use, Used
 A spade used often will not rust. (Japanese)
 A used plow shines, standing water stinks. (German)
 As a thing is used, so it brightens. (German)
@@ -21210,7 +21210,7 @@ Words without thought are merely wind. (Spanish)
 Wounds heal, but not ill words. (Spanish)
 You may gain by fair words what may fail you by angry ones. (Danish)
 
-Work, Works, Working
+Work, Working
 A good rest is half the work. (Slavic)
 A woman's work is never done. (English)
 A plow that works, shines, but still water stinks. (Dutch)

@@ -6,6 +6,9 @@ let path = require('path')
 let fs = require('fs')
 let util = require('util')
 
+let lunr = require('lunr')
+
+
 let usage = function() {
     console.error(`Usage: ${path.basename(process.argv[1])} file1.txt [file2.txt ...]`)
     process.exit(1)
@@ -28,6 +31,18 @@ let data_index_of = function(data, id) {
     return -1
 }
 
+let tags_stem = function(pair) {
+    if (pair[0] && pair[1]) {
+	let p1 = lunr.stemmer(pair[0])
+	let p2 = lunr.stemmer(pair[1])
+	if (p1 === p2) {
+	    // return the shortest word
+	    return [pair[0].length < pair[1].length ? pair[0] : pair[1]]
+	}
+    }
+    return pair
+}
+
 let parse = function(file) {
     let data = []
     let text = fs.readFileSync(file).toString().split("\n")
@@ -39,7 +54,7 @@ let parse = function(file) {
 	if (line.match(/^(\s*$|#.*)$/)) continue // comments & empty lines
 
 	if (!line.match(/[.?!]/)) {
-	    tags = parse_tags(line)
+	    tags = tags_stem(parse_tags(line))
 	    continue
 	}
 
