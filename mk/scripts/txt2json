@@ -43,6 +43,40 @@ let tags_stem = function(pair) {
     return pair
 }
 
+let origin = {
+    'Europe': ['Spanish', 'Slavic', 'Italian', 'French', 'English', 'Ukrainian', 'German', 'Danish', 'St Augustine', 'Rumanian', 'Roman', 'Portuguese', 'Albanian', 'Greek', 'Irish', 'Welsh', 'Swedish', 'Norwegian', 'Dutch', 'Scottish', 'Polish', 'the Bible', 'Serbian', 'Catalan', 'Sicilian', 'Georgian', 'Estonian', 'Belgian', 'Icelandic', 'Swiss', 'Finnish', 'Croatian', 'Hungarian', 'Jesus', 'Czech', 'Maltese', 'St Paul', 'Bulgarian', 'Flemish', 'Christian', 'Lithuanian', 'Basque', 'Latvian', 'Bosnian', 'British'],
+    'Middle East': ['Yiddish', 'Turkish', 'Moroccan', 'Lebanese', 'Egyptian', 'Ethiopian', 'Arabian', 'Kashmiri', 'Persian', 'Kurdish', 'Afghani', 'Urdu', 'Syrian', 'Ancient Sumerian', 'Yemeni', 'Libyan'],
+    // TODO: split Asia
+    'Asia': ['Chinese', 'Russian', 'Korean', 'Japanese', 'Tamil', 'Burmese', 'Filipino', 'Indian', 'Hindi', 'Vietnamese', 'Armenian', 'Malaysian', 'Siamese', 'Malay', 'Indonesian', 'Confucius', 'Malayan', 'Buddhist', 'Mongolian', 'Thai', 'Bengali', 'Tibetan', 'Punjabi', 'Hindu', 'Balinese', 'Laotian', 'Taoist', 'Samurai', 'Nepalese'],
+    'Latin America': ['Guatemalan', 'Honduran', 'Mexican', 'Puerto Rican', 'Colombian', 'Brazilian', 'Ecuadorian', 'Argentine'],
+    'Caribbean': ['Jamaican', 'Belizean'],
+    'America': ['American', 'Poor Richard', 'American Army', 'Native American', 'The Editor'],
+    'Africa': ['Zulu', 'Hausan', 'Swahili', 'African', 'Yoruban', 'Madagascan', 'Nigerian', 'West African', 'Tanzanian', 'Cambodian', 'Ugandan', 'Liberian', 'Singhalese', 'Kenyan', 'Rwandan', 'Sierra Leonean', 'Masai', 'Guinean', 'Ashanti', 'Somalian', 'Sudanese'],
+    'Polynesia': ['Polynesian', 'Hawaiian', 'Fijian', 'Haitian', 'Maori'],
+    'Wordwide': ['Unknown']
+}
+
+let origin_cache_make = function(origin) {
+    let r = {}
+    for (let origin_name in origin) {
+	for (let place of origin[origin_name]) {
+	    r[place] = origin_name
+	}
+    }
+    return r
+}
+
+let origin_cache = origin_cache_make(origin)
+
+let data_origin_get = function(tags) {
+    for (let tag of tags) {
+	if (tag in origin_cache) {
+	    return origin_cache[tag]
+	}
+    }
+    throw new Error(`no origin for ${tags}`)
+}
+
 let parse = function(file) {
     let data = []
     let text = fs.readFileSync(file).toString().split("\n")
@@ -70,7 +104,8 @@ let parse = function(file) {
 	    data.push({
 		id: index,
 		p: proverb,
-		t: ctags
+		t: ctags,
+		o: data_origin_get(ctags)
 	    })
 
 	    cache[proverb] = index++
@@ -83,4 +118,5 @@ let parse = function(file) {
 if (process.argv.length < 3) usage()
 
 let arr = process.argv.slice(2).map(parse)
-console.log(util.inspect(arr[0], { depth: null }))
+//console.log(util.inspect(arr[0], { depth: null }))
+process.stdout.write(JSON.stringify(arr))
