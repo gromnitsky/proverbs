@@ -27,8 +27,17 @@ bower-static.minify.suffix := .js .css
 endif
 bower-static.files := \
 	angular/angular.js \
-	angular-route/angular-route.js
+	angular-route/angular-route.js \
+	jquery/dist/jquery.js \
+	bootstrap/dist/js/bootstrap.js \
+	bootstrap/fonts/glyphicons-halflings-regular.eot \
+	bootstrap/fonts/glyphicons-halflings-regular.svg \
+	bootstrap/fonts/glyphicons-halflings-regular.ttf \
+	bootstrap/fonts/glyphicons-halflings-regular.woff \
+	bootstrap/fonts/glyphicons-halflings-regular.woff2
 include $(mk)/bower-static.mk
+
+include $(mk)/twitter-bootstrap.mk
 
 es6.out := $(out)/.tmp
 es6.files := $(wildcard $(src)/src/*.js)
@@ -42,6 +51,9 @@ browserify.suffix := .raw.js
 endif
 include $(mk)/browserify.mk
 
+# TODO: add dependency generation
+$(browserify.all): $(es6.all)
+
 js-minify.files := $(browserify.all)
 js-minify.suffix.from := .raw.js
 js-minify.suffix.to := .js
@@ -54,6 +66,7 @@ compile.all := \
 	$(packages.all) \
 	$(static.all) \
 	$(bower-static.all) \
+	$(twitter-bootstrap.all) \
 	$(es6.all) \
 	$(js-minify.all)
 
