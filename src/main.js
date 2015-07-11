@@ -4,6 +4,7 @@
 let meta = require('./package.json')
 let query = require('./query')
 let tags = require('./tags')
+let Index = require('./index')
 
 let http_err2str = function(err) {
     if (err instanceof Error) {
@@ -36,12 +37,20 @@ app.config(['$routeProvider', ($routeProvider) => {
 	})
 }])
 
-let MainCtrl = function($scope, $http) {
+// shared memory between controllers
+let sm = function() {
+    return {}
+}
+services.factory('sm', sm)
+
+let MainCtrl = function($scope, $http, sm) {
     $scope.load_data = function() {
+	$scope.status = 'Loading data...'
 	$http.get('data.json')
 	    .then( (r) => {
 		console.log(r)
-		$scope.ready = true
+		sm.index = new Index(r.data)
+		$scope.status = ''
 	    })
 	    .catch( (err) => {
 		$scope.status = http_err2str(err)
@@ -49,22 +58,27 @@ let MainCtrl = function($scope, $http) {
 	    });
     }
 
+    $scope.ready = function() {
+	return $scope.status === ''
+    }
+
     // Init
-    $scope.ready = false
     $scope.meta = meta
     $scope.load_data()
 }
 app.controller('MainCtrl', MainCtrl)
-MainCtrl.$inject = ['$scope', '$http']
+MainCtrl.$inject = ['$scope', '$http', 'sm']
 
-let SearchCtrl = function($scope) {
+
+let SearchCtrl = function($scope, sm) {
     $scope.$parent.nav_current = 'search'
 }
 app.controller('SearchCtrl', SearchCtrl)
-SearchCtrl.$inject = ['$scope']
+SearchCtrl.$inject = ['$scope', 'sm']
 
-let TagsCtrl = function($scope) {
+
+let TagsCtrl = function($scope, sm) {
     $scope.$parent.nav_current = 'tags'
 }
 app.controller('TagsCtrl', TagsCtrl)
-TagsCtrl.$inject = ['$scope']
+TagsCtrl.$inject = ['$scope', 'sm']
