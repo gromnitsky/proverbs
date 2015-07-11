@@ -14,7 +14,7 @@
 		   placeholder="love [europe]">
 	  </div>
 
-	  <button type="submit" ng-click="search()" class="btn btn-default">
+	  <button type="submit" ng-click="update_location()" class="btn btn-default">
 	    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 	  </button>
 	</fieldset>
@@ -74,7 +74,7 @@
 	<div class="row my-search-results__tags">
 	  <div class="col-sm-3"
 	       ng-repeat="tag in sm.tags | filter:query as results">
-	    <a href="" class="btn btn-default btn-xs">{{ tag.name }}</a>
+	    <a href="#/search?q=[{{tag.name}}]" class="btn btn-default btn-xs">{{ tag.name }}</a>
 	    <small>&times; {{ tag.n }}</small>
 	  </div>
 	</div>

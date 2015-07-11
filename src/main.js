@@ -85,6 +85,10 @@ let SearchCtrl = function($scope, $location, $window, sm) {
 	$window.scrollTo(0,0)
     }
 
+    $scope.update_location = function() {
+	$location.search({q: $scope.query})
+    }
+
     // Init
     $scope.search_results = []
     $scope.sm = sm
