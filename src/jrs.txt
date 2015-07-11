@@ -1478,7 +1478,7 @@ Beware of your friends, not your enemies. (Yiddish)
 Beware the wolf in sheep's clothing. (Jamaican)
 In life beware of law court; in death beware of Hell. (Chinese)
 
-Bible
+the Bible
 He has the Bible on his lips, but not in his heart. (Dutch)
 How many daily read the Bible, and yet from vice are not deterred. (Dutch)
 How many read the Bible, and yet pursue their course of evil. (German)
@@ -3257,7 +3257,7 @@ The heaviest ear of corn bends its head lowest. (Irish)
 Very good corn grows in little fields. (French)
 
 Cornerstone
-The same stone the builders rejected in the morning becomes the cornerstone. (Jamaican, Bible)
+The same stone the builders rejected in the morning becomes the cornerstone. (Jamaican, the Bible)
 
 Correction
 Acknowledgement is half of correction. (Russian)
@@ -4826,7 +4826,7 @@ The black dog gets the food; the white dog gets the blame. (Chinese)
 The dog does not get bread every time it wags its tail. (German)
 The dog gets into the mill under cover of the ass. (French)
 The dog laps the river as if to finish it all. (Yoruban)
-The dog returns to its vomit. (German, Bible)
+The dog returns to its vomit. (German, the Bible)
 The dog that has been beaten with a stick is afraid of its shadow. (Italian)
 The dog that is forced into the woods will not hunt many deer. (Danish)
 The dog that kills wolves, is killed by wolves. (Spanish)
@@ -8080,7 +8080,7 @@ Where God bestows an office, he provides brains to fill it. (German)
 Where God builds a church the Devil will build a chapel. (English)
 Where God has his church the Devil will have his chapel. (Spanish)
 Where the gods call, there one must go. (Roman)
-Whom God blesses, no one can curse. (Jamaican, Bible)
+Whom God blesses, no one can curse. (Jamaican, the Bible)
 Whom God would ruin, he first deprives of reason. (German)
 Whom God would sorely vex, he endows with abundant sense. (Yiddish)
 Whom Jupiter wishes to destroy, he first dements. (Roman)
