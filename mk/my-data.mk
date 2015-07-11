@@ -14,4 +14,4 @@ $(es6.out)/src/package.json: $(src)/package.json
 
 $(out)/src/data.json: $(my-data.files)
 	$(mkdir-target)
-	NODE_PATH=$(out)/node_modules $(src)/mk/scripts/txt2json $^ > $@
+	$(src)/mk/scripts/txt2json $^ > $@

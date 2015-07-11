@@ -15,6 +15,8 @@ include $(mk)/debug.mk
 include $(mk)/utils.mk
 include $(mk)/packages.mk
 
+export NODE_PATH=$(out)/node_modules
+
 static.out := $(out)
 static.files := $(wildcard $(src)/src/*.html)
 include $(mk)/static.mk

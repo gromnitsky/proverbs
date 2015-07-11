@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+'use strict';
+
+let fs = require('fs')
+let Index = require('../../src/index')
+
+let data = JSON.parse(fs.readFileSync('/dev/stdin').toString())
+let index = new Index(data, true)
+process.stdout.write(JSON.stringify(index.index.toJSON()))
+
+// let search = index.search('ukraine')
+// console.log(search)
+
+// for (let idx in search) {
+//     console.log(`${idx} ${data[search[idx].ref].p} (${data[search[idx].ref].t})`)
+// }
