@@ -44,7 +44,8 @@ let sm = function() {
 	    ready_ui: function() {
 		return this.msg === ''
 	    }
-	}
+	},
+	tags: []
     }
 }
 services.factory('sm', sm)
@@ -57,7 +58,7 @@ let MainCtrl = function($scope, $http, $q, sm) {
 		sm.index = new Index(r.data, true)
 		sm.status.ready.resolve(true)
 		sm.status.msg = ''
-		console.info('MainCtrl: load_data ok')
+		console.info('MainCtrl: load_data() ok')
 	    })
 	    .catch( (err) => {
 		sm.ready.reject(http_err2str(err))
@@ -92,6 +93,7 @@ let SearchCtrl = function($scope, $location, $window, sm) {
     if ('q' in $location.search()) {
 	$scope.query = $location.search().q
 	sm.status.ready.promise.then(function(ok) {
+	    console.info('SearchCtrl: sm.status.ready ok')
 	    $scope.search()
 	})
     }
@@ -101,7 +103,18 @@ SearchCtrl.$inject = ['$scope', '$location', '$window', 'sm']
 
 
 let TagsCtrl = function($scope, sm) {
+    // Init
+    $scope.sm = sm
     $scope.$parent.nav_current = 'tags'
+    $scope.query = ''
+
+    sm.status.ready.promise.then(function(ok) {
+	console.info('TagsCtrl: sm.status.ready ok')
+	if (sm.tags.length === 0) {
+	    sm.tags = tags.misc(sm.index.data)
+	    console.info('TagsCtrl: tags.misc()')
+	}
+    })
 }
 app.controller('TagsCtrl', TagsCtrl)
 TagsCtrl.$inject = ['$scope', 'sm']

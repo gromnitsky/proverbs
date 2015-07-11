@@ -45,7 +45,7 @@ exports.bo_get = function(tags) {
 }
 
 // Misc are tags that are not BO or SO.
-// Return a hash.
+// Return a sorted array.
 exports.misc = function(data) {
     let tags = {}
     for (let proverb in data) {
@@ -53,5 +53,9 @@ exports.misc = function(data) {
 	    if (!(tag in exports.so)) tags[tag] = tags[tag] + 1 || 1
 	}
     }
-    return tags
+
+    let keys = Object.keys(tags).sort()
+    return keys.map(function(val) {
+	return {name: val, n: tags[val]}
+    })
 }

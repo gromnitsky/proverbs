@@ -20,7 +20,7 @@
 	</fieldset>
       </form>
 
-      <div id="my-search-results" ng-show="search_results.length > 0">
+      <div class="my-search-results" ng-show="search_results.length > 0">
 	<small>Found: {{ search_results.length }}</small>
 	<table class="table table-condensed">
 	  <tbody>
@@ -57,7 +57,28 @@
     
 
     <script type="text/ng-template" id="template.tags">
-      <h1>Tags</h1>
+      <form novalidate class="form-inline">
+	<fieldset ng-disabled="!sm.status.ready_ui()">
+	  <div class="form-group">
+	    <input type="search" ng-model="query" class="form-control"
+		   placeholder="Filter" ng-trim="true">
+	  </div>
+	</fieldset>
+      </form>
+
+      <div class="my-search-results">
+	<p ng-if="results.length > 0">
+	  <small>Matched: {{ results.length }}</small>
+	</p>
+
+	<div class="row my-search-results__tags">
+	  <div class="col-sm-3"
+	       ng-repeat="tag in sm.tags | filter:query as results">
+	    <a href="" class="btn btn-default btn-xs">{{ tag.name }}</a>
+	    <small>&times; {{ tag.n }}</small>
+	  </div>
+	</div>
+      </div>
     </script>
 
   </head>
