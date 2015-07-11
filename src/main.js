@@ -2,7 +2,6 @@
 /* global angular */
 
 let meta = require('./package.json')
-let query = require('./query')
 let tags = require('./tags')
 let Index = require('./index')
 
@@ -39,42 +38,62 @@ app.config(['$routeProvider', ($routeProvider) => {
 
 // shared memory between controllers
 let sm = function() {
-    return {}
+    return {
+	status: {
+	    msg: '',
+	    ready_ui: function() {
+		return this.msg === ''
+	    }
+	}
+    }
 }
 services.factory('sm', sm)
 
-let MainCtrl = function($scope, $http, sm) {
+let MainCtrl = function($scope, $http, $q, sm) {
     $scope.load_data = function() {
-	$scope.status = 'Loading data...'
+	sm.status.msg = 'Loading data...'
 	$http.get('data.json')
 	    .then( (r) => {
-		console.log(r)
-		sm.index = new Index(r.data)
-		$scope.status = ''
+		sm.index = new Index(r.data, true)
+		sm.status.ready.resolve(true)
+		sm.status.msg = ''
+		console.info('MainCtrl: load_data ok')
 	    })
 	    .catch( (err) => {
-		$scope.status = http_err2str(err)
-		console.log(err)
+		sm.ready.reject(http_err2str(err))
+		sm.status.msg = http_err2str(err)
 	    });
-    }
-
-    $scope.ready = function() {
-	return $scope.status === ''
     }
 
     // Init
     $scope.meta = meta
+    $scope.sm = sm
+    // child controller can check this to determine if the UI is ready
+    sm.status.ready = $q.defer()
     $scope.load_data()
 }
 app.controller('MainCtrl', MainCtrl)
-MainCtrl.$inject = ['$scope', '$http', 'sm']
+MainCtrl.$inject = ['$scope', '$http', '$q', 'sm']
 
 
-let SearchCtrl = function($scope, sm) {
+let SearchCtrl = function($scope, $location, sm) {
+    $scope.search = function() {
+	console.log(sm.index.search($scope.query))
+    }
+
+    // Init
+    $scope.sm = sm
     $scope.$parent.nav_current = 'search'
+    $scope.query = ''
+    if ('q' in $location.search()) {
+	$scope.query = $location.search().q
+	sm.status.ready.promise.then(function(ok) {
+	    $scope.search()
+	})
+    }
 }
 app.controller('SearchCtrl', SearchCtrl)
-SearchCtrl.$inject = ['$scope', 'sm']
+SearchCtrl.$inject = ['$scope', '$location', 'sm']
 
 
 let TagsCtrl = function($scope, sm) {
