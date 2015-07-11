@@ -62,13 +62,16 @@ include $(mk)/js-minify.mk
 test-mocha.files.dir := $(src)/test
 include $(mk)/test-mocha.mk
 
+include $(mk)/my-data.mk
+
 compile.all := \
 	$(packages.all) \
 	$(static.all) \
 	$(bower-static.all) \
 	$(twitter-bootstrap.all) \
 	$(es6.all) \
-	$(js-minify.all)
+	$(js-minify.all) \
+	$(my-data.all)
 
 compile: $(compile.all)
 
