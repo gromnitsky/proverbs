@@ -12,20 +12,41 @@ let app = angular.module('proverbs', [
 
 app.config(['$routeProvider', ($routeProvider) => {
     $routeProvider
-	.when('/', {
-	    templateUrl: 'template.about',
-	    controller: "QAboutCtrl"
+	.when('/about', {
+	    templateUrl: 'template.main',
+	    controller: "AboutCtrl"
+	})
+	.when('/search', {
+	    templateUrl: 'template.main',
+	    controller: "SearchCtrl"
+	})
+	.when('/tags', {
+	    templateUrl: 'template.main',
+	    controller: "TagsCtrl"
 	})
 	.otherwise({
-	    redirectTo: '/'
+	    redirectTo: '/about'
 	})
 }])
 
-let QAboutCtrl = function($scope, $location) {
-//    $scope.result = sm.quiz.result
+let AboutCtrl = function($scope, $location) {
+    $scope.template_body = 'template.about'
 }
-app.controller('QAboutCtrl', QAboutCtrl)
-QAboutCtrl.$inject = ['$scope', '$location']
+app.controller('AboutCtrl', AboutCtrl)
+AboutCtrl.$inject = ['$scope', '$location']
+
+let SearchCtrl = function($scope, $location) {
+    $scope.template_body = 'template.search'
+}
+app.controller('SearchCtrl', SearchCtrl)
+SearchCtrl.$inject = ['$scope', '$location']
+
+let TagsCtrl = function($scope, $location) {
+    $scope.template_body = 'template.tags'
+}
+app.controller('TagsCtrl', TagsCtrl)
+TagsCtrl.$inject = ['$scope', '$location']
+
 
 let bootstrap_angular = function() {
     angular.bootstrap(document, ['proverbs'])
