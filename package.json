@@ -5,6 +5,7 @@
     "private": "true",
     "author": "ag",
     "license": "MIT",
+    "url": "https://github.com/gromnitsky/proverbs",
     "dependencies": {
 	"lunr": "~0.5.11",
 	"mocha": "~2.2.5",

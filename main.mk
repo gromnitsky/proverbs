@@ -16,9 +16,7 @@ include $(mk)/utils.mk
 include $(mk)/packages.mk
 
 static.out := $(out)
-static.files := $(wildcard \
-	$(src)/src/*.html \
-	$(src)/src/*.css)
+static.files := $(wildcard $(src)/src/*.html)
 include $(mk)/static.mk
 
 bower-static.out := src/vendor
@@ -72,6 +70,8 @@ compile.all := \
 	$(es6.all) \
 	$(js-minify.all) \
 	$(my-data.all)
+
+$(browserify.all): $(my-data.all)
 
 compile: $(compile.all)
 

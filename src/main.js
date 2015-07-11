@@ -1,6 +1,7 @@
 'use strict';
 /* global angular */
 
+let meta = require('./package.json')
 let query = require('./query')
 let tags = require('./tags')
 
@@ -50,6 +51,7 @@ let MainCtrl = function($scope, $http) {
 
     // Init
     $scope.ready = false
+    $scope.meta = meta
     $scope.load_data()
 }
 app.controller('MainCtrl', MainCtrl)

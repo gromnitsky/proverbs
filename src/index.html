@@ -13,7 +13,10 @@
 	    <input type="text" class="form-control"
 		   placeholder="love [europe]">
 	  </div>
-	  <button type="submit" class="btn btn-default">Search</button>
+
+	  <button type="submit" class="btn btn-default">
+	    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	  </button>
 	</fieldset>
       </form>
     </script>
@@ -60,12 +63,21 @@
 
       <div class="alert alert-warning" role="alert"
 	   ng-show="status">{{ status }}</div>
-      <div ng-view>Loading...</div>
+
+      <div class="row">
+	<div class="col-sm-9">
+	  <div ng-view>Loading...</div>
+	</div>
+	<div class="col-sm-3">
+	  Big Origin
+	</div>
+      </div>
     </div>
 
     <footer>
       <div class="container">
-	Hey
+	Version: {{ ::meta.version }}<br>
+	Source code & license: <a href="{{ ::meta.url }}">{{ ::meta.url }}</a>
       </div>
     </footer>
 
