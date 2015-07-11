@@ -39,13 +39,16 @@ let tags_stem = function(pair) {
     return pair
 }
 
+let conf = {
+    index: 0
+}
+
 let parse = function(file) {
     let data = []
     let text = fs.readFileSync(file).toString().split("\n")
 
     let tags = []
     let cache = {}
-    let index = 0
     for (let line of text) {
 	if (line.match(/^(\s*$|#.*)$/)) continue // comments & empty lines
 
@@ -64,13 +67,13 @@ let parse = function(file) {
 	    data[idx].t = tags_union(data[idx].t, ctags)
 	} else {
 	    data.push({
-		id: index,
+		id: conf.index,
 		p: proverb,
 		t: ctags,
 		bo: alltags.bo_get(ctags)
 	    })
 
-	    cache[proverb] = index++
+	    cache[proverb] = conf.index++
 	}
     }
 
