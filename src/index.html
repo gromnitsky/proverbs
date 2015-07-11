@@ -1,58 +1,21 @@
 <!doctype html>
-<html>
+<html ng-app="ProverbsApp">
   <head>
     <title>Proverbs</title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="main.css">
 
-    <script type="text/ng-template" id="template.main">
-
-      <nav class="navbar navbar-default">
-	<div class="container">
-
-	  <div class="navbar-header">
-	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-navbar-collapse-1">
-	      <span class="sr-only">Toggle navigation</span>
-	      <span class="icon-bar"></span>
-	      <span class="icon-bar"></span>
-	      <span class="icon-bar"></span>
-	    </button>
-	    <a class="navbar-brand" href="#/about">Proverbs</a>
-	  </div>
-
-	  <div class="collapse navbar-collapse" id="my-navbar-collapse-1">
-	    <ul class="nav navbar-nav">
-	      <li class="active"><a href="#/search">Search</a></li>
-	      <li class=""><a href="#/tags">Tags</a></li>
-	    </ul>
-	  </div>
-
-	</div>
-      </nav>
-
-      <!-- controllers set this -->
-      <div class="container" ng-include="template_body"></div>
-
-      <footer>
-	<div class="container">
-	  Hey
-	</div>
-      </footer>
-
-    </script>
-
-    
-
-
-    <script type="text/ng-template" id="template.about">
-      <h1>About</h1>
-    </script>
-
-    
-
     <script type="text/ng-template" id="template.search">
-      <h1>Search</h1>
+      <form class="form-inline">
+	<fieldset ng-disabled="!$parent.ready">
+	  <div class="form-group">
+	    <input type="text" class="form-control"
+		   placeholder="love [europe]">
+	  </div>
+	  <button type="submit" class="btn btn-default">Search</button>
+	</fieldset>
+      </form>
     </script>
 
     
@@ -63,11 +26,48 @@
 
   </head>
 
-  <body>
+  <body ng-controller="MainCtrl">
 
-    <noscript>Hi, what is life like for you?</noscript>
+    <nav class="navbar navbar-default">
+      <div class="container">
 
-    <div ng-view>Loading...</div>
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-navbar-collapse-1">
+	    <span class="sr-only">Toggle navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="#/">Proverbs</a>
+	</div>
+
+	<div class="collapse navbar-collapse" id="my-navbar-collapse-1">
+	  <ul class="nav navbar-nav">
+	    <li ng-class="{'active': nav_current == 'search'}">
+	      <a href="#/search">Search</a>
+	    </li>
+	    <li ng-class="{'active': nav_current == 'tags'}">
+	      <a href="#/tags">Tags</a>
+	    </li>
+	  </ul>
+	</div>
+
+      </div>
+    </nav>
+
+    <div class="container">
+      <noscript><h1>Hi, JavaScript disabled, what is life like for you?</h1></noscript>
+
+      <div class="alert alert-warning" role="alert"
+	   ng-show="status">{{ status }}</div>
+      <div ng-view>Loading...</div>
+    </div>
+
+    <footer>
+      <div class="container">
+	Hey
+      </div>
+    </footer>
 
     <script src="vendor/jquery/dist/jquery.js"></script>
     <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
