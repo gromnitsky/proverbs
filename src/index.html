@@ -27,7 +27,7 @@
       <div ng-include="template_search_form_url"></div>
 
       <div class="my-search-results" ng-show="search_results.length > 0">
-	<small>Found: {{ search_results.length }}</small>
+	<p><small>Found: {{ search_results.length }}</small></p>
 	<div ng-include="template_proverb_table_url"></div>
       </div>
 
@@ -141,12 +141,22 @@
 	   ng-show="sm.status.msg">{{ sm.status.msg }}</div>
 
       <div class="row">
+
 	<div class="col-sm-9">
 	  <div ng-view>Loading...</div>
 	</div>
+
 	<div class="col-sm-3">
-	  Big Origin
+	  <ul ng-repeat="(key,val) in bo">
+	    <li>
+	      <a href="#/search?q={{ key }}">{{ key }}</a>
+	      <ul ng-repeat="so in val | orderBy:'toString()'">
+		<li><a href="#/search?q=[{{ so }}]">{{ so }}</a></li>
+	      </ul>
+	    </li>
+	  </ul>
 	</div>
+
       </div>
     </div>
 

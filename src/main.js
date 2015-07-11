@@ -71,6 +71,7 @@ let MainCtrl = function($scope, $http, $q, sm) {
     }
 
     // Init
+    $scope.bo = tags.bo
     $scope.meta = meta
     $scope.sm = sm
     // child controller can check this to determine if the UI is ready
