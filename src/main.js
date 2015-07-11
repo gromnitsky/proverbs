@@ -31,6 +31,10 @@ app.config(['$routeProvider', ($routeProvider) => {
 	    templateUrl: 'template.tags',
 	    controller: "TagsCtrl"
 	})
+	.when('/id/:id', {
+	    templateUrl: 'template.id',
+	    controller: "IdCtrl"
+	})
 	.otherwise({
 	    redirectTo: () => '/search?q=love'
 	})
@@ -80,22 +84,24 @@ MainCtrl.$inject = ['$scope', '$http', '$q', 'sm']
 let SearchCtrl = function($scope, $location, $window, sm) {
     $scope.search = function() {
 	$scope.search_results = []
-	let r = sm.index.search($scope.query)
+	let r = sm.index.search($scope.query.value)
 	$scope.search_results = r
 	$window.scrollTo(0,0)
     }
 
     $scope.update_location = function() {
-	$location.search({q: $scope.query})
+	$location.search({q: $scope.query.value})
     }
 
     // Init
+    $scope.template_search_form_url = 'template.search_form'
+    $scope.template_proverb_table_url = 'template.proverb_table'
     $scope.search_results = []
     $scope.sm = sm
     $scope.$parent.nav_current = 'search'
-    $scope.query = ''
+    $scope.query = { value: '' }
     if ('q' in $location.search()) {
-	$scope.query = $location.search().q
+	$scope.query.value = $location.search().q
 	sm.status.ready.promise.then(function(ok) {
 	    console.info('SearchCtrl: sm.status.ready ok')
 	    $scope.search()
@@ -104,6 +110,27 @@ let SearchCtrl = function($scope, $location, $window, sm) {
 }
 app.controller('SearchCtrl', SearchCtrl)
 SearchCtrl.$inject = ['$scope', '$location', '$window', 'sm']
+
+
+let IdCtrl = function($scope, $location, $routeParams, sm) {
+    $scope.update_location = function() {
+	$location.path('/search').search({q: $scope.query.value})
+    }
+
+    // Init
+    $scope.template_search_form_url = 'template.search_form'
+    $scope.template_proverb_table_url = 'template.proverb_table'
+    $scope.search_results = []
+    $scope.sm = sm
+    $scope.$parent.nav_current = ''
+    $scope.query = { value: '' }
+    sm.status.ready.promise.then(function(ok) {
+	console.info('IdCtrl: sm.status.ready ok')
+	$scope.search_results = [sm.index.data[$routeParams.id]]
+    })
+}
+app.controller('IdCtrl', IdCtrl)
+IdCtrl.$inject = ['$scope', '$location', '$routeParams', 'sm']
 
 
 let TagsCtrl = function($scope, sm) {

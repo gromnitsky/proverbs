@@ -6,11 +6,11 @@
 
     <link rel="stylesheet" href="main.css">
 
-    <script type="text/ng-template" id="template.search">
+    <script type="text/ng-template" id="template.search_form">
       <form novalidate class="form-inline">
 	<fieldset ng-disabled="!sm.status.ready_ui()">
 	  <div class="form-group">
-	    <input type="text" ng-model="query" class="form-control"
+	    <input type="text" ng-model="query.value" class="form-control"
 		   placeholder="love [europe]">
 	  </div>
 
@@ -19,39 +19,61 @@
 	  </button>
 	</fieldset>
       </form>
+    </script>
+
+    
+
+    <script type="text/ng-template" id="template.search">
+      <div ng-include="template_search_form_url"></div>
 
       <div class="my-search-results" ng-show="search_results.length > 0">
 	<small>Found: {{ search_results.length }}</small>
-	<table class="table table-condensed">
-	  <tbody>
-
-	    <tr ng-repeat="proverb in search_results">
-	      <td>
-		<a href="#/id/{{ proverb.id }}">
-		  <span class="glyphicon glyphicon-link" aria-hidden="true">
-		  </span>
-		</a>
-	      </td>
-	      <td>
-		<span class="glyphicon glyphicon-copy" aria-hidden="true">
-		</span>
-	      </td>
-	      <td>{{ proverb.p }}</td>
-	      <td>
-		<span ng-repeat="tag in proverb.t" class="my-search-results__tags">
-		  <a href="#/search?q=[{{ tag }}]"
-		     class="btn btn-default btn-xs">
-		    {{ tag }}
-		  </a>
-
-		</span>
-	      </td>
-	    </tr>
-
-	  </tbody>
-	</table>
+	<div ng-include="template_proverb_table_url"></div>
       </div>
 
+    </script>
+
+    
+
+    <script type="text/ng-template" id="template.proverb_table">
+      <table class="table table-condensed">
+	<tbody>
+
+	  <tr ng-repeat="proverb in search_results">
+	    <td>
+	      <a href="#/id/{{ proverb.id }}">
+		<span class="glyphicon glyphicon-link" aria-hidden="true">
+		</span>
+	      </a>
+	    </td>
+	    <td>
+	      <span class="glyphicon glyphicon-copy" aria-hidden="true">
+	      </span>
+	    </td>
+	    <td>{{ proverb.p }}</td>
+	    <td>
+	      <span ng-repeat="tag in proverb.t" class="my-search-results__tags">
+		<a href="#/search?q=[{{ tag }}]"
+		   class="btn btn-default btn-xs">
+		  {{ tag }}
+		</a>
+
+	      </span>
+	    </td>
+	  </tr>
+
+	</tbody>
+      </table>
+    </script>
+
+    
+
+    <script type="text/ng-template" id="template.id">
+      <div ng-include="template_search_form_url"></div>
+
+      <div class="my-search-results" ng-show="search_results.length > 0">
+	<div ng-include="template_proverb_table_url"></div>
+      </div>
     </script>
 
     
