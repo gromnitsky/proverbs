@@ -9,7 +9,7 @@ let normalize = function(str) {
 }
 
 exports.parse = function(input) {
-    let tags_regexp = /-?\[[a-zA-Z0-9 ]+\]/g
+    let tags_regexp = /-?\[[a-zA-Z0-9- ]+\]/g
 
     let query = ''
     let tags_include = []

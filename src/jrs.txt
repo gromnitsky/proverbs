@@ -2,12 +2,8 @@
 #
 # Empty & comment lines are ignored.
 #
-# Lines:
-#
 # tag1, tag2
 # text. (tag3, tag4)
-#
-# shoud be converted to {'text': ['tag1', 'tag2', 'tag3', 'tag4']}
 
 Abbot
 An abbot who has been an altar boy knows well who drinks the altar wine. (Spanish)
