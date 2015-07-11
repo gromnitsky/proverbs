@@ -32,7 +32,7 @@ app.config(['$routeProvider', ($routeProvider) => {
 	    controller: "TagsCtrl"
 	})
 	.otherwise({
-	    redirectTo: '/search'
+	    redirectTo: () => '/search?q=love'
 	})
 }])
 
@@ -76,12 +76,16 @@ app.controller('MainCtrl', MainCtrl)
 MainCtrl.$inject = ['$scope', '$http', '$q', 'sm']
 
 
-let SearchCtrl = function($scope, $location, sm) {
+let SearchCtrl = function($scope, $location, $window, sm) {
     $scope.search = function() {
-	console.log(sm.index.search($scope.query))
+	$scope.search_results = []
+	let r = sm.index.search($scope.query)
+	$scope.search_results = r
+	$window.scrollTo(0,0)
     }
 
     // Init
+    $scope.search_results = []
     $scope.sm = sm
     $scope.$parent.nav_current = 'search'
     $scope.query = ''
@@ -93,7 +97,7 @@ let SearchCtrl = function($scope, $location, sm) {
     }
 }
 app.controller('SearchCtrl', SearchCtrl)
-SearchCtrl.$inject = ['$scope', '$location', 'sm']
+SearchCtrl.$inject = ['$scope', '$location', '$window', 'sm']
 
 
 let TagsCtrl = function($scope, sm) {

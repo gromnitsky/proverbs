@@ -19,6 +19,39 @@
 	  </button>
 	</fieldset>
       </form>
+
+      <div id="my-search-results" ng-show="search_results.length > 0">
+	<small>Found: {{ search_results.length }}</small>
+	<table class="table table-condensed">
+	  <tbody>
+
+	    <tr ng-repeat="proverb in search_results">
+	      <td>
+		<a href="#/id/{{ proverb.id }}">
+		  <span class="glyphicon glyphicon-link" aria-hidden="true">
+		  </span>
+		</a>
+	      </td>
+	      <td>
+		<span class="glyphicon glyphicon-copy" aria-hidden="true">
+		</span>
+	      </td>
+	      <td>{{ proverb.p }}</td>
+	      <td>
+		<span ng-repeat="tag in proverb.t" class="my-search-results__tags">
+		  <a href="#/search?q=[{{ tag }}]"
+		     class="btn btn-default btn-xs">
+		    {{ tag }}
+		  </a>
+
+		</span>
+	      </td>
+	    </tr>
+
+	  </tbody>
+	</table>
+      </div>
+
     </script>
 
     
@@ -41,7 +74,7 @@
 	    <span class="icon-bar"></span>
 	    <span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" href="#/">Proverbs</a>
+	  <a class="navbar-brand" href="#/search?q=ukraine">Proverbs</a>
 	</div>
 
 	<div class="collapse navbar-collapse" id="my-navbar-collapse-1">
