@@ -1,6 +1,9 @@
 'use strict';
 /* global angular */
 
+// for old browsers (IE12, Android 4.4, etc.)
+require("babel/polyfill")
+
 let meta = require('./package.json')
 let tags = require('./tags')
 let Index = require('./index')
