@@ -1,25 +1,25 @@
 # Proverbs
 
-A JFF SPA viewer of a collection of ancient and modern proverbs from
-peoples around the world.
+A JFF SPA viewer of a collection of ancient and modern proverbs.
 
 Uses lunr.js for the FTS. Doesn't contain any server-side code. A
 usual, dull Angular app.
 
 ## Why?
 
-Sometimes I enjoy trolling people's Facebook posts w/ 'wisdom', thus I
-needed a way to query a DB w/ proverbs.
+I needed a way to search through 'wisdom' proverbs solely for the
+purpose of trolling on Facebook. It turns out, many take such noncence
+('ancient sayings about love', omg) at face value.
 
-If you'd like to add a missing proverb, edit `src/misc.txt`, the go to
-the temporal directory and type:
+If you'd like to add a missing proverb, edit `src/misc.txt`, then go
+to the temporal directory and type:
 
 	$ make -f PATH_TO_THE_SOURCE/proverbs/main.mk NODE_ENV=production
 
 (iojs 2.x & bower are required.)
 
 The directory `release/src` will contain full, ready to deploy, SPA
-code. rsync it to a directory that is served by any static HTTP
+code. rsync it to a directory that is served by any HTTP static
 server.
 
 ## Bugs
