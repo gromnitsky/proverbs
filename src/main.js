@@ -59,15 +59,15 @@ services.factory('sm', sm)
 let copyToClipboard = function($timeout) {
     let link = function(scope, element, attrs) {
 	let tr = element.parent("tr")
-	let proverb = tr[0].querySelector(".my-proverb")
+	let proverb = $(".my-proverb", tr)
 
 	element.bind('click', function() {
-	    console.log(proverb.innerText)
+	    console.log(proverb.text())
 	    angular.element(proverb).addClass('my-proverb-active')
 	    $timeout( () => angular.element(proverb).removeClass('my-proverb-active'), 200)
 
 	    let clipboard = document.getElementById('clipboard')
-	    clipboard.value = proverb.innerText
+	    clipboard.value = proverb.text()
 	    clipboard.select()
 	    document.execCommand("copy", false, null)
 	    // remove focus from textarea element
