@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="ProverbsApp">
+<html ng-app="ProverbsApp" ng-strict-di>
   <head>
     <title>Proverbs</title>
     <meta charset="utf-8">
@@ -36,6 +36,9 @@
     
 
     <script type="text/ng-template" id="template.proverb_table">
+      <!-- user selected text from table cells goes here -->
+      <textarea class="my-clipboard" id="clipboard"></textarea>
+
       <table class="table table-condensed">
 	<tbody>
 
@@ -46,11 +49,11 @@
 		</span>
 	      </a>
 	    </td>
-	    <td>
+	    <td class="my-copy-to-clipboard" copy-to-clipboard>
 	      <span class="glyphicon glyphicon-copy" aria-hidden="true">
 	      </span>
 	    </td>
-	    <td>{{ proverb.p }}</td>
+	    <td class="my-proverb">{{ proverb.p }}</td>
 	    <td>
 	      <span ng-repeat="tag in proverb.t" class="my-search-results__tags">
 		<a href="#/search?q=[{{ tag }}]"
@@ -167,8 +170,8 @@
       </div>
     </footer>
 
-    <script src="vendor/jquery/dist/jquery.js"></script>
-    <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- <script src="vendor/jquery/dist/jquery.js"></script> -->
+    <!-- <script src="vendor/bootstrap/dist/js/bootstrap.js"></script> -->
     <script src="vendor/angular/angular.js"></script>
     <script src="vendor/angular-route/angular-route.js"></script>
 
