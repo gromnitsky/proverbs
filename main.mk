@@ -79,3 +79,8 @@ compile: $(compile.all)
 
 .PHONY: test
 test: compile test-mocha
+
+.PHONY: deploy
+deploy: compile
+	rsync -avPL --delete -e ssh $(out)/src/ \
+		gromnitsky@web.sourceforge.net:/home/user-web/gromnitsky/htdocs/js/proverbs
