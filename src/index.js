@@ -45,6 +45,13 @@ class Index {
     search(str) {
 	let r = []
 	let uq = query.parse(str)
+
+	for (let idx of uq.id) {
+	    let row = this.data[idx]
+	    r.push(row)
+	}
+	if (r.length > 0) return r
+
 	if (uq.query.length <= 2) {
 	    if (uq.tags.include.length === 0 && uq.tags.exclude.length === 0) {
 		return r

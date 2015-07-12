@@ -96,4 +96,10 @@ suite('index', function() {
 	assert(r.length > 1000)
     })
 
+    test('1 tag, 2 IDs', function() {
+	let r = this.index.search("[ukrainian] [:3876] [:12]")
+	assert.equal(2, r.length)
+	assert(r[0].p.match(/the tavern is far/))
+    })
+
 })

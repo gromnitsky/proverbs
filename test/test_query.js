@@ -20,7 +20,8 @@ suite('query', function() {
 	    tags: {
 		include: ['foo', 'baz'],
 		exclude: ['bar']
-	    }
+	    },
+	    id: []
 	}, query.parse('this [foo] is a -[bar] [baz] query'))
     })
 
@@ -30,7 +31,8 @@ suite('query', function() {
 	    tags: {
 		include: [],
 		exclude: []
-	    }
+	    },
+	    id: []
 	}, query.parse(' '))
     })
 
@@ -40,7 +42,8 @@ suite('query', function() {
 	    tags: {
 		include: [],
 		exclude: []
-	    }
+	    },
+	    id: []
 	}, query.parse('hello'))
     })
 
@@ -50,7 +53,8 @@ suite('query', function() {
 	    tags: {
 		include: ['hello', 'world'],
 		exclude: []
-	    }
+	    },
+	    id: []
 	}, query.parse('[hello][world]'))
     })
 
@@ -60,7 +64,8 @@ suite('query', function() {
 	    tags: {
 		include: ['hello world'],
 		exclude: ['omg lol']
-	    }
+	    },
+	    id: []
 	}, query.parse('[hello world]-[omg  lol]'))
     })
 
@@ -70,8 +75,31 @@ suite('query', function() {
 	    tags: {
 		include: [],
 		exclude: []
-	    }
+	    },
+	    id: []
 	}, query.parse('try harder [dude'))
+    })
+
+    test('tags, id, query', function() {
+	assert.deepEqual({
+	    query: "goodbye cruel",
+	    tags: {
+		include: ['hello', 'world'],
+		exclude: []
+	    },
+	    id: [1234]
+	}, query.parse('goodbye [hello] cruel [world] [:1234]'))
+    })
+
+    test('2 IDs', function() {
+	assert.deepEqual({
+	    query: "",
+	    tags: {
+		include: [],
+		exclude: []
+	    },
+	    id: [1234, 5678]
+	}, query.parse('[:1234][:5678]'))
     })
 
 })

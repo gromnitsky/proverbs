@@ -55,7 +55,7 @@
 
 	  <tr ng-repeat="proverb in search_results">
 	    <td>
-	      <a href="#/id/{{ proverb.id }}">
+	      <a href="#/search?q=[:{{ proverb.id }}]">
 		<span class="glyphicon glyphicon-link" aria-hidden="true">
 		</span>
 	      </a>
@@ -78,16 +78,6 @@
 
 	</tbody>
       </table>
-    </script>
-
-    
-
-    <script type="text/ng-template" id="template.id">
-      <div ng-include="template_search_form_url"></div>
-
-      <div class="my-search-results" ng-show="search_results.length > 0">
-	<div ng-include="template_proverb_table_url"></div>
-      </div>
     </script>
 
     
