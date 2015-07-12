@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="main.css">
 
     <script type="text/ng-template" id="template.search_form">
-      <form novalidate class="form-inline">
+      <form novalidate>
 	<fieldset ng-disabled="!sm.status.ready_ui()">
-	  <div class="form-group">
+	  <div class="input-group">
 	    <input type="text" ng-model="query.value" class="form-control"
 		   placeholder="love [english]">
+
+	    <span class="input-group-btn">
+	      <button type="submit" ng-click="update_location()" class="btn btn-default">
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	      </button>
+	    </span>
 	  </div>
 
-	  <button type="submit" ng-click="update_location()" class="btn btn-default">
-	    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-	  </button>
-	  <br>
 	  <span class="my-small-print">
 	    To search within specific tag(s), use the square
 	    brackets: <code>[french] love</code>; several tags means
-	    U; To <i>exclude</i> results from a tag, prefix it with a
+	    U; to <i>exclude</i> results from a tag, prefix it with a
 	    minus: <code>love -[french]</code>.
 	  </span>
 	</fieldset>
