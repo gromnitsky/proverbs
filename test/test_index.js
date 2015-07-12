@@ -38,7 +38,7 @@ suite('index', function() {
 		exclude: []
 	    }
 	})
-	assert.equal(16916, r.length)
+	assert(r.length > 10000)
     })
 
     test('with 1 exclude', function() {
@@ -85,4 +85,15 @@ suite('index', function() {
 //	console.log(r)
 	assert.equal(4, r.length)
     })
+
+    test('search via lunr only', function() {
+	let r = this.index.search("roman")
+	assert(r.length > 1000)
+    })
+
+    test('search via tags', function() {
+	let r = this.index.search("[roman]")
+	assert(r.length > 1000)
+    })
+
 })
