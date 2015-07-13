@@ -113,10 +113,8 @@ MainCtrl.$inject = ['$scope', '$http', '$q', 'sm']
 
 let SearchCtrl = function($scope, $location, $window, sm) {
     $scope.search = function() {
-	$scope.search_results = []
-	let r = sm.index.search($scope.query.value)
-	$scope.search_results = r
-	$window.scrollTo(0,0)
+	$scope.search_results = sm.index.search($scope.query.value)
+	$window.scrollTo(0, 0)
     }
 
     $scope.update_location = function() {

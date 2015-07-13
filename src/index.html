@@ -55,7 +55,7 @@
 
 	  <tr ng-repeat="proverb in search_results">
 	    <td>
-	      <a href="#/search?q=[:{{ proverb.id }}]">
+	      <a href="#/search?q=[:{{ ::proverb.id }}]">
 		<span class="glyphicon glyphicon-link" aria-hidden="true">
 		</span>
 	      </a>
@@ -64,12 +64,12 @@
 	      <span class="glyphicon glyphicon-copy" aria-hidden="true">
 	      </span>
 	    </td>
-	    <td class="my-proverb">{{ proverb.p }}</td>
+	    <td class="my-proverb">{{ ::proverb.p }}</td>
 	    <td>
-	      <span ng-repeat="tag in proverb.t" class="my-search-results__tags">
-		<a href="#/search?q=[{{ tag }}]"
+	      <span ng-repeat="tag in ::proverb.t" class="my-search-results__tags">
+		<a href="#/search?q=[{{ ::tag }}]"
 		   class="btn btn-default btn-xs">
-		  {{ tag }}
+		  {{ ::tag }}
 		</a>
 
 	      </span>
@@ -100,8 +100,8 @@
 	<div class="row my-search-results__tags">
 	  <div class="col-sm-3"
 	       ng-repeat="tag in sm.tags | filter:query as results">
-	    <a href="#/search?q=[{{tag.name}}]" class="btn btn-default btn-xs">{{ tag.name }}</a>
-	    <small>&times; {{ tag.n }}</small>
+	    <a href="#/search?q=[{{::tag.name}}]" class="btn btn-default btn-xs">{{ ::tag.name }}</a>
+	    <small>&times; {{ ::tag.n }}</small>
 	  </div>
 	</div>
       </div>
@@ -153,9 +153,9 @@
 	<div class="col-sm-3">
 	  <ul ng-repeat="(key,val) in ::bo">
 	    <li>
-	      <a href="#/search?q={{ key }}">{{ key }}</a>
+	      <a href="#/search?q={{ ::key }}">{{ ::key }}</a>
 	      <ul ng-repeat="so in ::val | orderBy:'toString()'">
-		<li><a href="#/search?q=[{{ so }}]">{{ so }}</a></li>
+		<li><a href="#/search?q=[{{ ::so }}]">{{ ::so }}</a></li>
 	      </ul>
 	    </li>
 	  </ul>
