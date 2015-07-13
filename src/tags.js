@@ -2,7 +2,7 @@
 
 // Big Origin to Small Origin
 exports.bo = {
-    'Europe': ['Spanish', 'Slavic', 'Italian', 'French', 'English', 'Ukrainian', 'German', 'Danish', 'St Augustine', 'Rumanian', 'Roman', 'Portuguese', 'Albanian', 'Greek', 'Irish', 'Welsh', 'Swedish', 'Norwegian', 'Dutch', 'Scottish', 'Polish', 'the Bible', 'Serbian', 'Catalan', 'Sicilian', 'Georgian', 'Estonian', 'Belgian', 'Icelandic', 'Swiss', 'Finnish', 'Croatian', 'Hungarian', 'Jesus', 'Czech', 'Maltese', 'St Paul', 'Bulgarian', 'Flemish', 'Christian', 'Lithuanian', 'Basque', 'Latvian', 'Bosnian', 'British'],
+    'Europe': ['Spanish', 'Slavic', 'Italian', 'French', 'English', 'Ukrainian', 'German', 'Danish', 'St Augustine', 'Rumanian', 'Roman', 'Portuguese', 'Albanian', 'Greek', 'Irish', 'Welsh', 'Swedish', 'Norwegian', 'Dutch', 'Scottish', 'Polish', 'the Bible', 'Serbian', 'Catalan', 'Sicilian', 'Georgian', 'Estonian', 'Belgian', 'Icelandic', 'Swiss', 'Finnish', 'Croatian', 'Hungarian', 'Jesus', 'Czech', 'Maltese', 'St Paul', 'Bulgarian', 'Flemish', 'Christian', 'Lithuanian', 'Basque', 'Latvian', 'Bosnian'],
     'Middle East': ['Yiddish', 'Turkish', 'Moroccan', 'Lebanese', 'Egyptian', 'Ethiopian', 'Arabian', 'Kashmiri', 'Persian', 'Kurdish', 'Afghani', 'Urdu', 'Syrian', 'Ancient Sumerian', 'Yemeni', 'Libyan'],
     // TODO: split Asia
     'Asia': ['Chinese', 'Russian', 'Korean', 'Japanese', 'Tamil', 'Burmese', 'Filipino', 'Indian', 'Hindi', 'Vietnamese', 'Armenian', 'Malaysian', 'Siamese', 'Malay', 'Indonesian', 'Confucius', 'Malayan', 'Buddhist', 'Mongolian', 'Thai', 'Bengali', 'Tibetan', 'Punjabi', 'Hindu', 'Balinese', 'Laotian', 'Taoist', 'Samurai', 'Nepalese'],
