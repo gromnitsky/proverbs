@@ -83,6 +83,24 @@ app.directive('copyToClipboard', copyToClipboard)
 copyToClipboard.$inject = ['$timeout']
 
 
+let grabFocus = function($timeout) {
+    let link = function(scope, element, attrs) {
+//	console.log(scope.grabFocusWhen)
+	if (scope.grabFocusWhen) element.focus()
+    }
+
+    return {
+	link: link,
+	scope: {
+	    grabFocusWhen: '='
+	},
+	restrict: 'A'
+    }
+}
+app.directive('grabFocus', grabFocus)
+grabFocus.$inject = ['$timeout']
+
+
 let MainCtrl = function($scope, $http, $q, sm) {
     $scope.load_data = function() {
 	sm.status.msg = 'Loading data...'
@@ -118,8 +136,10 @@ let SearchCtrl = function($scope, $location, $window, sm) {
     }
 
     $scope.update_location = function() {
-	$location.search({q: $scope.query.value})
+	$location.search({q: $scope.query.value, 'm': 1})
     }
+
+    $scope.is_mode_manual = () => $location.search().m === 1
 
     // Init
     $scope.template_search_form_url = 'template.search_form'

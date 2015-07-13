@@ -13,7 +13,8 @@
 	<fieldset ng-disabled="!sm.status.ready_ui()">
 	  <div class="input-group">
 	    <input type="text" ng-model="query.value" class="form-control"
-		   placeholder="love [english]">
+		   placeholder="love [english]" grab-focus
+		   grab-focus-when="is_mode_manual()">
 
 	    <span class="input-group-btn">
 	      <button type="submit" ng-click="update_location()" class="btn btn-default">
