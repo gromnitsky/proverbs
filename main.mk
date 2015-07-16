@@ -34,7 +34,9 @@ bower-static.files := \
 	bootstrap/fonts/glyphicons-halflings-regular.svg \
 	bootstrap/fonts/glyphicons-halflings-regular.ttf \
 	bootstrap/fonts/glyphicons-halflings-regular.woff \
-	bootstrap/fonts/glyphicons-halflings-regular.woff2
+	bootstrap/fonts/glyphicons-halflings-regular.woff2 \
+	angular-utils-pagination/dirPagination.js \
+	angular-utils-pagination/dirPagination.tpl.html
 include $(mk)/bower-static.mk
 
 include $(mk)/twitter-bootstrap.mk

@@ -21,6 +21,7 @@ let http_err2str = function(err) {
 let services = angular.module('proverbs.services', [])
 let app = angular.module('ProverbsApp', [
     'ngRoute',
+    'angularUtils.directives.dirPagination',
     'proverbs.services'
 ])
 
